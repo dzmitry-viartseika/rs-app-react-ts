@@ -1,0 +1,11 @@
+@import '../index.css';
+
+.app {
+    padding: 20px;
+}
+
+.title {
+    font-size: 40px;
+    text-align: center;
+}
+
