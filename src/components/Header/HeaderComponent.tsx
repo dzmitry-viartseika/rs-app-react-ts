@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../Header/headerComponent.css'
 import logo from '../../assets/images/logo/logo.png';
 import menuList from '../../constants/menuList';
 import IMenuItem from '../../models/IMenuItem';
+import '../Header/headerComponent.css';
 
 class HeaderComponent extends Component {
 
@@ -15,7 +15,7 @@ class HeaderComponent extends Component {
         const { menuItems } = this.state;
         return (
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
-            <div className="container flex flex-wrap items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between">
                 <Link to="/" className="flex items-center">
                     <img src={logo} className="h-6 mr-3 sm:h-9"
                          alt="Test Logo"/>
