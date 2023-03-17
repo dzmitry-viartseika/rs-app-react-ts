@@ -8,4 +8,9 @@ describe('HomePage.tsx', () => {
         render(<HomePage />);
         expect(screen.queryByTestId('pageTitle')).toBeInTheDocument();
     });
+
+    it('should render CardItem with cardList', () => {
+        render(<HomePage />);
+        expect(screen.getAllByTestId('cardItem')).toHaveLength(10);
+    })
 });
