@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest';
 import { render, screen } from '../../../utils/test-utils';
 import App from '../../../App';
 
-describe('AboutUsPage.tsx', () => {
+describe('App.tsx', () => {
     it('should be visible page title', () => {
         render(<App />);
-        expect(screen.queryByTestId('searchInput')).toBeDefined();
+        expect(screen.queryByTestId('headerComponent')).toBeDefined();
     });
 });

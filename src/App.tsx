@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="app">
         <BrowserRouter>
-            <HeaderComponent data-testid="searchInput"/>
+            <HeaderComponent data-testid="headerComponent"/>
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutUsPage />} />
