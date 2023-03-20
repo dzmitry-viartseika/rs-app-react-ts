@@ -11,6 +11,11 @@ const menuList: IMenuItem[] = [
         title: 'About',
         route: '/about'
     },
+    {
+        id: 3,
+        title: 'Form',
+        route: '/form'
+    },
 ];
 
 export default menuList;
