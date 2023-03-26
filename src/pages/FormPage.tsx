@@ -224,6 +224,7 @@ class FormPage extends Component {
                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FirstName</label>
                             <input type="text"
                                    id="small-input"
+                                   data-testid="firstnameInput"
                                    value={this.state.firstName}
                                    name="firstName" onChange={this.handleChangeFirstName}
                                    className="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
@@ -332,10 +333,10 @@ class FormPage extends Component {
                         </button>
                     </div>
                 </div>
-                <div className="my-10">
-                    {formList.map((item: IFormItem) => {
-                        return <FormItem key={item.id} item={item} />
-                    })}
+                <div className="my-10" data-testid="formList">
+                    {formList && formList.length ? formList.map((item: IFormItem) => {
+                        return <FormItem item={item} />
+                    }) : <h5 data-testid="formText">You can add your first data</h5>}
                 </div>
             </div>
         );

@@ -8,11 +8,11 @@ class ValidationForm extends Component<MyProps, IState> {
     render() {
         const { textError } = this.props;
         return (
-            <>
-                <p className="text-red-500 text-xs mt-2">
+            <div data-testid="formError">
+                <p className="text-red-500 text-xs mt-2 app-form__validation">
                     { textError }
                 </p>
-            </>
+            </div>
         );
     }
 }

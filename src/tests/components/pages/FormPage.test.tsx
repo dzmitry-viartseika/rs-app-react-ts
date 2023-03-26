@@ -8,4 +8,9 @@ describe('FormPage.tsx', () => {
         render(<FormPage />);
         expect(screen.queryByTestId('pageTitle')).toBeInTheDocument();
     });
+
+    it('should be visible content according to the props', () => {
+        render(<FormPage />);
+        expect(screen.queryByTestId('formText')).toBeInTheDocument();
+    });
 });
