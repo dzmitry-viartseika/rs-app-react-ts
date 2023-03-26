@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import FormItem from "../components/Form/FormItem";
 import IFormItem from '../models/IFormItem';
-import IForm from "../models/IFormItem";
 import ValidationForm from "../components/Form/Validation/ValidationForm";
-class FormPage extends Component<IForm, IFormItem> {
+class FormPage extends Component {
 
     state = {
         firstName: '',
@@ -28,6 +27,7 @@ class FormPage extends Component<IForm, IFormItem> {
         stateError: '',
         isReceivePromoError: '',
         acceptPersonalDataError: '',
+        profileImageError: '',
     }
 
     componentDidMount() {
@@ -118,7 +118,9 @@ class FormPage extends Component<IForm, IFormItem> {
             if (!deliveryDate) {
                 this.setState({deliveryDateError: 'Enter Delivery Date'})
             }
-
+            if (!profileImage) {
+                this.setState({profileImageError: 'Set up profileImage'})
+            }
         }
     }
 
@@ -322,6 +324,7 @@ class FormPage extends Component<IForm, IFormItem> {
                                 aria-describedby="file_input_help" id="file_input"  accept="image/*" type="file" onChange={this.handleFileChange}/>
                                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG,
                                     PNG, JPG or GIF (MAX. 800x400px).</p>
+                            { !this.state.profileImage ? <ValidationForm textError={this.state.profileImageError}/> : null }
                         </div>
                         <button type="button"
                                 onClick={this.submitData}

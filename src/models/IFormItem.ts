@@ -35,5 +35,6 @@ export default interface IForm {
     stateError: string;
     isReceivePromoError: string;
     acceptPersonalDataError: string;
+    profileImageError: string;
 }
 
