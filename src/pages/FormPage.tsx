@@ -280,7 +280,7 @@ class FormPage extends Component {
                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                             <label htmlFor="checked-checkbox1"
                                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Receive Promo</label>
-                            { !this.state.gender ? <ValidationForm textError={this.state.isReceivePromoError} /> : null }
+                            { !this.state.isReceivePromo ? <ValidationForm textError={this.state.isReceivePromoError} /> : null }
                         </div>
                         <div className="mb-4">
                             <input className="mx-1" type="radio" value="Male" name="gender" onChange={this.handleChangeGender} /> Male
@@ -335,8 +335,8 @@ class FormPage extends Component {
                 </div>
                 <div className="my-10" data-testid="formList">
                     {formList && formList.length ? formList.map((item: IFormItem) => {
-                        return <FormItem item={item} />
-                    }) : <h5 data-testid="formText">You can add your first data</h5>}
+                        return <FormItem item={item} key={item.id}/>
+                    }) : <h5 className="text-center" data-testid="formText">You did not add first data</h5>}
                 </div>
             </div>
         );
