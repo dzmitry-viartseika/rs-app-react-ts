@@ -8,7 +8,6 @@ describe('FormPage.tsx', () => {
         const props = {
             textError: 'Set up your field'
         }
-        // @ts-ignore
         const { getByText } = render(<ValidationForm {...props} />);
         const textError = getByText(props.textError);
 
