@@ -21,7 +21,6 @@ describe('FormPage.tsx', () => {
                 profileImage: null,
             }
         }
-        // @ts-ignore
         const { getByText } = render(<FormItem {...props} />);
         const firstName = getByText(props.item.firstName);
         const lastName = getByText(props.item.lastName);

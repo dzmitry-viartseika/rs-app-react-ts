@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import CardItem from './CardItem';
-import IState from '../../models/IState';
+import React from 'react';
 import ICardItem from '../../models/ICardItem';
+import CardItem from "./CardItem";
 
 type MyProps = {
-    cardList: ICardItem[],
+    items: ICardItem[],
 };
 
-class CardList extends Component<MyProps, IState> {
-    render() {
-        const { cardList } = this.props;
-        return (
-            <div className="grid gap-x-8 gap-y-4 grid-cols-5">
-                { cardList.map((card: ICardItem) => {
-                    return <CardItem card={card} key={card.id} />
-                })}
-            </div>
-        );
-    }
+function CardList(props: MyProps): JSX.Element {
+    return (
+        <div className="grid gap-x-8 gap-y-4 grid-cols-5">
+            { props.items.map((card: ICardItem) => {
+                return <CardItem card={card} key={card.id} />
+            })}
+        </div>
+    )
 }
 
 export default CardList;

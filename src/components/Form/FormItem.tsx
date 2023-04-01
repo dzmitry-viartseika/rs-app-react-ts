@@ -1,48 +1,58 @@
-import React, { Component } from 'react';
-import IState from '../../models/IState';
+import React from 'react';
 import IFormItem from "../../models/IFormItem";
+import classes from '../Form/formItem.module.css'
+import CheckboxComponent from "../Elements/CheckboxComponent/CheckboxComponent";
 
+
+export default FormItem;
 type MyProps = {
     item: IFormItem,
 };
-class FormItem extends Component<MyProps, IState> {
-    render() {
-        const { item: { firstName, lastName, zipCode, deliveryDate, birthDay, country, state, acceptPersonalData, gender, isReceivePromo } } = this.props;
-        return (
-            <div className="flex justify-center items-center mb-8" data-testid="formItem">
-                <div className="w-40 px-5">
-                    { firstName }
-                </div>
-                <div className="w-40 px-5">
-                    { lastName }
-                </div>
-                <div className="w-40 px-5">
-                     { zipCode }
-                </div>
-                <div className="w-40 px-5">
-                     { deliveryDate }
-                </div>
-                <div className="w-40 px-5">
-                    { birthDay }
-                </div>
-                <div className="w-40 px-5">
-                     { country }
-                </div>
-                <div className="w-40 px-5">
-                    { state }
-                </div>
-                <div className="w-40 px-5">
-                    {acceptPersonalData }
-                </div>
-                <div className="w-40 px-5">
-                    { gender }
-                </div>
-                <div className="w-40 px-5">
-                     {isReceivePromo }
-                </div>
-            </div>
-        );
-    }
-}
+function FormItem(props: MyProps): JSX.Element {
 
-export default FormItem;
+    return (
+        <div className={`${classes.form__item} flex flex-col mb-8`} data-testid="formItem">
+            <div className="px-5">
+                firstName = { props.item.firstName }
+            </div>
+            <div className="px-5">
+                lastName = { props.item.lastName }
+            </div>
+            <div className="px-5">
+                zipCode = { props.item.zipCode }
+            </div>
+            <div className="px-5">
+                deliveryDate = { props.item.deliveryDate }
+            </div>
+            <div className="px-5">
+                birthDay = { props.item.birthDay }
+            </div>
+            <div className="px-5">
+                country = { props.item.selectedOptionCountry }
+            </div>
+            <div className="px-5">
+                state = { props.item.selectedOptionState }
+            </div>
+            <div className="px-5">
+                <CheckboxComponent
+                    label={'I consist to my personal data'}
+                    checked={props.item.isAgreedWithPersonalData }
+                    disabled={true}
+                />
+            </div>
+            <div className="px-5">
+                gender = { props.item.selectedOptionGender }
+            </div>
+            <div className="px-5">
+                <CheckboxComponent
+                    label={'Receive Promo'}
+                    checked={props.item.isReceivePromo}
+                    disabled={true}
+                />
+            </div>
+            {
+                props.item.selectedFile ? <img src={URL.createObjectURL(props.item.selectedFile)} alt="uploaded file" />: null
+            }
+        </div>
+    )
+}
