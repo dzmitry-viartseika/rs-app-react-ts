@@ -8,7 +8,7 @@ type InputProps = {
     errorMessage?: string,
     className?: string,
     placeholder?: string,
-    onChange: ChangeEventHandler<HTMLInputElement>;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 const InputComponent = ({ value, label, type, className, placeholder, onChange, errorMessage }: InputProps) => {
     return (

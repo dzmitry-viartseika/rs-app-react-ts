@@ -3,33 +3,30 @@ import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import FormItem from "../../../components/Form/FormItem";
 
-describe('FormPage.tsx', () => {
+describe('FormItem.tsx', () => {
     it('should be visible content according to the props', () => {
-        const props = {
-            item: {
-                id: 1,
+        const item = {
+                id: '1',
                 firstName: 'Dzmitry',
-                lastName: 'Viartseika',
-                zipCode: '04-170',
-                deliveryDate: '10-10-2023',
+                zipCode: '123',
+                lastName: 'Test',
+                deliveryDate: '23-10-2023',
                 birthDay: '23-10-1990',
-                country: 'Poland',
-                state: 'Warsaw',
-                acceptPersonalData: true,
-                gender: 'Male',
+                selectedOptionCountry: 'Option 1',
+                selectedOptionState: 'State 1',
+                isAgreedWithPersonalData: true,
                 isReceivePromo: true,
-                profileImage: null,
+                selectedOptionGender: 'Male',
             }
-        }
-        const { getByText } = render(<FormItem {...props} />);
-        const firstName = getByText(props.item.firstName);
-        const lastName = getByText(props.item.lastName);
-        const zipCode = getByText(props.item.zipCode);
-        const deliveryDate = getByText(props.item.deliveryDate);
-        const birthDay = getByText(props.item.birthDay);
-        const country = getByText(props.item.country);
-        const state = getByText(props.item.country);
-        const gender = getByText(props.item.gender);
+        const { getByText } = render(<FormItem item={item} />);
+        const firstName = getByText(item.firstName);
+        const lastName = getByText(item.lastName);
+        const zipCode = getByText(item.zipCode);
+        const deliveryDate = getByText(item.deliveryDate);
+        const birthDay = getByText(item.birthDay);
+        const country = getByText(item.selectedOptionCountry);
+        const state = getByText(item.selectedOptionState);
+        const gender = getByText(item.selectedOptionGender);
 
         expect(firstName).toBeInTheDocument();
         expect(lastName).toBeInTheDocument();

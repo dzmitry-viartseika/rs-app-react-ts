@@ -10,5 +10,5 @@ export default interface IFormItem {
     isAgreedWithPersonalData: boolean,
     selectedOptionGender: string,
     isReceivePromo: boolean,
-    selectedFile: null | File;
+    selectedFile?: null | File;
 }

@@ -136,6 +136,7 @@ function FormPage(): JSX.Element {
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const target = event.target as HTMLInputElement;
         const file: File = (target.files as FileList)[0];
+        console.log('file', file)
         setSelectedFile(file);
         if (!file) {
             setErrorMessageFile('Input must be fulfilled');
@@ -171,7 +172,6 @@ function FormPage(): JSX.Element {
             selectedOptionCountry &&
             selectedOptionGender &&
             selectedOptionState) {
-
             setFormList([...formList, result])
             alert('The form has been sent!');
             resetFormState();
@@ -235,7 +235,7 @@ function FormPage(): JSX.Element {
     }
 
     return (
-        <div>
+        <div data-testid="formText">
             <h1 className="title mb-6" data-testid="pageTitle">FORM PAGE</h1>
             <div className="app-form">
                 <div className="flex justify-center align-items flex-col">

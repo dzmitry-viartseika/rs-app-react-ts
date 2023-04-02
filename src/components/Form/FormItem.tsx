@@ -13,25 +13,25 @@ function FormItem(props: MyProps): JSX.Element {
     return (
         <div className={`${classes.form__item} flex flex-col mb-8`} data-testid="formItem">
             <div className="px-5">
-                firstName = { props.item.firstName }
+                { props.item.firstName }
             </div>
             <div className="px-5">
-                lastName = { props.item.lastName }
+                { props.item.lastName }
             </div>
             <div className="px-5">
-                zipCode = { props.item.zipCode }
+                { props.item.zipCode }
             </div>
             <div className="px-5">
-                deliveryDate = { props.item.deliveryDate }
+                { props.item.deliveryDate }
             </div>
             <div className="px-5">
-                birthDay = { props.item.birthDay }
+                { props.item.birthDay }
             </div>
             <div className="px-5">
-                country = { props.item.selectedOptionCountry }
+                { props.item.selectedOptionCountry }
             </div>
             <div className="px-5">
-                state = { props.item.selectedOptionState }
+                { props.item.selectedOptionState }
             </div>
             <div className="px-5">
                 <CheckboxComponent
@@ -41,7 +41,7 @@ function FormItem(props: MyProps): JSX.Element {
                 />
             </div>
             <div className="px-5">
-                gender = { props.item.selectedOptionGender }
+                { props.item.selectedOptionGender }
             </div>
             <div className="px-5">
                 <CheckboxComponent
@@ -51,7 +51,7 @@ function FormItem(props: MyProps): JSX.Element {
                 />
             </div>
             {
-                props.item.selectedFile ? <img src={URL.createObjectURL(props.item.selectedFile)} alt="uploaded file" />: null
+                    props.item.selectedFile ? <img src={URL.createObjectURL(props.item.selectedFile)} data-testid="formItemFileImage" alt="uploaded file" />: null
             }
         </div>
     )
