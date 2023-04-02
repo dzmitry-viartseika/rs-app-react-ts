@@ -318,6 +318,7 @@ function FormPage(): JSX.Element {
             <ValidationForm textError={errorMessageGender} />
 
             <SelectComponent
+                label="Select Country"
                 value={selectedOptionCountry}
                 onChange={handleOptionChangeCountry}
                 errorMessage={errorMessageCountry}
@@ -325,6 +326,7 @@ function FormPage(): JSX.Element {
             />
 
             <SelectComponent
+                label="Select State"
                 value={selectedOptionState}
                 onChange={handleOptionChangeState}
                 errorMessage={errorMessageState}
