@@ -37,7 +37,6 @@ function FormPage(): JSX.Element {
     const onChangeHandlerFirstName = (event: ChangeEvent<HTMLInputElement>) => {
         const target = event.target as HTMLInputElement;
         setFirstName((target.value));
-        // validate input value
         if (target.value.length < 3) {
             setErrorMessageFirstName('Input must be at least 3 characters long');
         } else {
