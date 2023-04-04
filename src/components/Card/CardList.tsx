@@ -6,10 +6,10 @@ type MyProps = {
     items: ICardItem[],
 };
 
-function CardList(props: MyProps): JSX.Element {
+function CardList({ items }: MyProps): JSX.Element {
     return (
         <div className="grid gap-x-8 gap-y-4 grid-cols-5">
-            { props.items.map((card: ICardItem) => {
+            { items.map((card: ICardItem) => {
                 return <CardItem card={card} key={card.id} />
             })}
         </div>
