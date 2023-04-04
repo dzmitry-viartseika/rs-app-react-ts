@@ -1,16 +1,14 @@
 import React, {ChangeEventHandler }  from 'react';
-import ValidationForm from "../../Form/Validation/ValidationForm";
 
 type InputProps = {
     label: string,
     type: string,
     value: string,
-    errorMessage?: string,
     className?: string,
     placeholder?: string,
     onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-const InputComponent = ({ value, label, type, className, placeholder, onChange, errorMessage }: InputProps) => {
+const InputComponent = ({ value, label, type, className, placeholder, onChange }: InputProps) => {
     return (
         <div>
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor={label}>
@@ -24,7 +22,6 @@ const InputComponent = ({ value, label, type, className, placeholder, onChange, 
                     placeholder={placeholder}
                 />
             </label>
-            { errorMessage ? <ValidationForm textError={errorMessage} /> : null }
         </div>
     )
 };

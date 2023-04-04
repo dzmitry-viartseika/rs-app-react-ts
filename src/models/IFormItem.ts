@@ -1,5 +1,5 @@
+
 export default interface IFormItem {
-    id?: string,
     firstName: string;
     lastName: string;
     zipCode: string;
@@ -10,5 +10,5 @@ export default interface IFormItem {
     isAgreedWithPersonalData: boolean,
     selectedOptionGender: string,
     isReceivePromo: boolean,
-    selectedFile?: null | File;
+    selectedFile?: FileList | File | Blob | MediaSource | undefined | null;
 }

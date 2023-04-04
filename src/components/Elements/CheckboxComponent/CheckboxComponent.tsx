@@ -1,14 +1,12 @@
 import React, {ChangeEventHandler} from 'react';
-import ValidationForm from "../../Form/Validation/ValidationForm";
 
 type CheckBoxProps = {
     checked: boolean,
     disabled?: boolean,
-    errorMessage?: string,
     label: string,
     onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-function CheckboxComponent ({ checked, disabled, errorMessage, label, onChange }: CheckBoxProps) {
+function CheckboxComponent ({ checked, disabled, label, onChange }: CheckBoxProps) {
 
     return (
         <div>
@@ -23,7 +21,6 @@ function CheckboxComponent ({ checked, disabled, errorMessage, label, onChange }
                     { label }
                 </span>
             </label>
-            { errorMessage ? <ValidationForm textError={errorMessage} /> : null }
         </div>
     );
 }

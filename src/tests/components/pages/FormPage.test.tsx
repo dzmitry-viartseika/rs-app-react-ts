@@ -29,7 +29,6 @@ describe('FormPage.tsx', () => {
         const handleClickEvent = screen.getByRole('button', { name: /Submit Data/i });
 
         const firstNameInput = screen.getByLabelText(/^First Name/i);
-        console.log('firstNameInput', firstNameInput)
         fireEvent.input(firstNameInput, { target: { value: 'ww' } });
         fireEvent.click(handleClickEvent);
         await screen.findByText('Enter First letter UpperCase');
