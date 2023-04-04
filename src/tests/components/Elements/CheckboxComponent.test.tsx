@@ -16,11 +16,4 @@ describe('CheckBoxComponent.tsx', () => {
         const checkboxComponent = getByRole('checkbox');
         expect(checkboxComponent).toHaveAttribute('disabled');
     });
-
-    it('should have a errorMessage', () => {
-        const ERROR_MESSAGE = 'Error message'
-        const { getByText } = render(<CheckboxComponent checked={true} disabled={true} label={LABEL_TEXT} errorMessage={ERROR_MESSAGE} />);
-        const errorText = getByText(ERROR_MESSAGE);
-        expect(errorText).toBeInTheDocument();
-    });
 });

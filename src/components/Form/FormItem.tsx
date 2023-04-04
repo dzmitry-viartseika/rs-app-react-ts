@@ -9,7 +9,7 @@ type MyProps = {
     item: IFormItem,
 };
 function FormItem(props: MyProps): JSX.Element {
-
+    const imgSrc = props.item.selectedFile ? URL.createObjectURL(props.item.selectedFile) : '';
     return (
         <div className={`${classes.form__item} flex flex-col mb-8`} data-testid="formItem">
             <div className="px-5">
@@ -51,7 +51,7 @@ function FormItem(props: MyProps): JSX.Element {
                 />
             </div>
             {
-                    props.item.selectedFile ? <img src={URL.createObjectURL(props.item.selectedFile)} data-testid="formItemFileImage" alt="uploaded file" />: null
+                imgSrc && <img src={imgSrc} data-testid="formItemFileImage" alt="uploaded file" />
             }
         </div>
     )

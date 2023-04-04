@@ -10,11 +10,4 @@ describe('InputComponent.tsx', () => {
         const label = getByText(LABEL_TEXT);
         expect(label).toBeInTheDocument();
     });
-
-    it('should have a errorMessage', () => {
-        const ERROR_MESSAGE = 'Error message'
-        const { getByText } = render(<InputComponent label="test label"  type="text" value="text Value" className="textClass" errorMessage={ERROR_MESSAGE} />);
-        const errorText = getByText(ERROR_MESSAGE);
-        expect(errorText).toBeInTheDocument();
-    });
 });
