@@ -29,7 +29,7 @@ describe('ModalCardComponent.tsx', () => {
             url: "https://rickandmortyapi.com/api/character/1",
         }
     it('should be visible Loader', () => {
-        const { container } = render(<ModalCardComponent card={card} onClose={onClick}/>);
+        const { container } = render(<ModalCardComponent card={card} onClose={onClose}/>);
         expect(container).toBeInTheDocument();
     });
 });
