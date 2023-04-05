@@ -45,38 +45,39 @@ function ModalCardComponent(props: MyProp) {
                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div className="sm:flex sm:items-start">
                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3
-                                    className="text-lg leading-6 font-medium text-gray-900"
-                                    id="modal-headline"
-                                >
-                                    Full information
-                                </h3>
-                                <div className="mt-2">
-                                    <p className="text-sm text-gray-500">
-                                        name: { props.card.name }
+                                <div className="flex justify-between items-center">
+                                    <h3
+                                        className="text-2xl font-medium text-gray-900"
+                                    >
+                                        Full information
+                                    </h3>
+                                    <ButtonComponent
+                                        type="button"
+                                        onClick={props.onClose}
+                                        buttonText={'x'}
+                                    />
+                                </div>
+                                <div className="py-4 flex justify-center flex-col items-center">
+                                    <div className="mb-2">
+                                        <img src={props.card.image} alt=""/>
+                                    </div>
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        <span className="font-bold pr-1">Name:</span> { props.card.name }
                                     </p>
-                                    <img src={props.card.image} alt=""/>
-                                    <p className="text-sm text-gray-500">
-                                        created: { props.card.created }
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        <span className="font-bold pr-1">Created:</span> { props.card.created }
                                     </p>
-                                    <p className="text-sm text-gray-500">
-                                        gender: { props.card.gender }
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        <span className="font-bold pr-1">Gender:</span> { props.card.gender }
                                     </p>
-                                    <p className="text-sm text-gray-500">
-                                        status: { props.card.status }
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        <span className="font-bold pr-1">Status:</span>{ props.card.status }
                                     </p>
-                                    <p className="text-sm text-gray-500">
-                                        species: { props.card.species }
+                                    <p className="mb-2 text-sm text-gray-500">
+                                        <span className="font-bold pr-1">Species:</span> { props.card.species }
                                     </p>
                                 </div>
                             </div>
-                            <ButtonComponent
-                                type="button"
-                                onClick={props.onClose}
-                                buttonText={'X'}
-                            >
-                                Read more
-                            </ButtonComponent>
                         </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -84,9 +85,7 @@ function ModalCardComponent(props: MyProp) {
                             type="button"
                             onClick={props.onClose}
                             buttonText={'Close'}
-                        >
-                            Read more
-                        </ButtonComponent>
+                        />
                     </div>
                 </div>
             </div>
