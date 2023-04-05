@@ -18,7 +18,7 @@ function HomePage(): JSX.Element {
             setSearchText(searchText);
         }
         setIsLoader(true)
-        axios.get(`https://rickandmortyapi.com/api//character?name=${searchText}`)
+        axios.get(searchText ? `https://rickandmortyapi.com/api/character?name=${searchText}` : 'https://rickandmortyapi.com/api//character/')
             .then(response => {
                 setIsLoader(false)
                 setCardItems(response.data.results)
