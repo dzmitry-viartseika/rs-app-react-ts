@@ -1,0 +1,11 @@
+.form__item {
+  min-width: 500px;
+  border: 1px solid gray;
+  padding: 5px;
+  margin: 5px;
+}
+
+.form__item img {
+  max-width: 100px;
+  height: auto;
+}

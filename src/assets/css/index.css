@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.app-form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #c1bbbb;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.app-form__validation {
+    min-height: 15px;
+}

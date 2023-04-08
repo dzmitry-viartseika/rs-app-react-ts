@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AboutUsPage extends Component {
-    render() {
-        return (
-            <div>
-                <h1 className="title" data-testid="pageTitle">ABOUT PAGE</h1>
-            </div>
-        );
-    }
+function AboutUsPage(): JSX.Element {
+    return (
+        <div>
+            <h1 className="title mb-6" data-testid="pageTitle">About Page</h1>
+        </div>
+    )
 }
 
-export default AboutUsPage;
+export default AboutUsPage

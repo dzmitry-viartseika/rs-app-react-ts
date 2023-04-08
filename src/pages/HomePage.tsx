@@ -1,40 +1,38 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState} from 'react';
 import SearchComponent from "../components/Elements/Search/SearchComponent";
 import cardList from '../constants/cardList';
 import CardList from '../components/Card/CardList';
+import ICardItem from "../models/ICardItem";
 
-class HomePage extends Component {
 
-    state = {
-        cardList: cardList,
-        searchText: '',
-    }
+function HomePage(): JSX.Element {
+    const [cardItems, setCardItems] = useState<ICardItem[]>([]);
+    const [searchText, setSearchText] = useState<string>('');
 
-    handleCallback = (data: string): void => {
-        this.setState({ searchText: data })
+    useEffect(() => {
+        setCardItems(cardList)
+        const searchText = localStorage.getItem('searchText');
+        if (searchText) {
+            setSearchText(searchText);
+        }
+    }, [])
+
+    const handleCallback = (data: string): void => {
+        setSearchText(data);
         localStorage.setItem('searchText', data);
     }
 
-    componentDidMount() {
-        const searchText = localStorage.getItem('searchText');
-        if (searchText) {
-            this.setState({ searchText: searchText })
-        }
-    }
+    const filteredItems = cardItems.filter(item => item.title.includes(searchText));
 
-    render() {
-        const { cardList, searchText } = this.state;
-        const filteredItems = cardList.filter(item => item.title.includes(searchText));
 
-        return (
-            <>
-                <SearchComponent searchText={searchText} handleEvent={this.handleCallback}/>
-                <br/>
-                <h1 className="title mb-6" data-testid="pageTitle">HOME PAGE</h1>
-                <CardList cardList={filteredItems}/>
-            </>
-        );
-    }
+    return (
+        <>
+            <SearchComponent searchText={searchText} handleEvent={handleCallback}/>
+            <br/>
+            <h1 className="title mb-6" data-testid="pageTitle">HOME PAGE</h1>
+            <CardList items={filteredItems}/>
+        </>
+    )
 }
 
 export default HomePage;
