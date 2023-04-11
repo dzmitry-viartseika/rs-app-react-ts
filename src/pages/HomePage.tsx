@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, {KeyboardEvent, useEffect, useState} from 'react';
 import CardList from '../components/Card/CardList';
 import ICardItem from "../models/ICardItem";
 import axios from 'axios'
@@ -15,7 +15,7 @@ function HomePage(): JSX.Element {
         setServerMessage('')
         const searchText = localStorage.getItem('searchText');
         if (searchText) {
-            setSearchText(searchText);
+            setUpdatedText(searchText);
         }
         setIsLoader(true)
         axios.get(searchText ? `https://rickandmortyapi.com/api/character?name=${searchText}` : 'https://rickandmortyapi.com/api//character/')
@@ -29,11 +29,11 @@ function HomePage(): JSX.Element {
         });
     }, [searchText])
 
-    const handleChange = (event: any): void => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setUpdatedText(event.target.value);
     }
 
-    const handleKeyDown = (event: any): void => {
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Enter') {
             setSearchText(updatedText);
             localStorage.setItem('searchText', event.target.value);
