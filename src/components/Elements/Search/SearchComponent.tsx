@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 type MyProps = {
     searchText: string,
@@ -6,11 +6,18 @@ type MyProps = {
 };
 
 function SearchComponent(props: MyProps): JSX.Element {
+    const [localState, setLocalState] = useState('');
+    const handleChange = (event: any): void => {
+        setLocalState(event.target.value)
+    }
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const inputValue = event.target.value;
-        event.preventDefault();
-        props.handleEvent(inputValue);
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            props.handleEvent(localState);
+            console.log('Enter key pressed!');
+            // Access the input value from state
+            console.log('Input value:', localState);
+        }
     }
 
     return (
@@ -30,6 +37,7 @@ function SearchComponent(props: MyProps): JSX.Element {
                        placeholder="Search" required
                        value={props.searchText}
                        onChange={handleChange}
+                       onKeyDown={handleKeyDown}
                 />
             </div>
         </div>

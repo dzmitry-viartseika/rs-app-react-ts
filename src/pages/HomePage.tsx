@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from 'react';
-import SearchComponent from "../components/Elements/Search/SearchComponent";
 import CardList from '../components/Card/CardList';
 import ICardItem from "../models/ICardItem";
 import axios from 'axios'
@@ -8,6 +7,7 @@ import LoaderTemplate from "../components/Elements/Loader/LoaderTemplate";
 function HomePage(): JSX.Element {
     const [cardItems, setCardItems] = useState<ICardItem[]>([]);
     const [searchText, setSearchText] = useState<string>('');
+    const [updatedText, setUpdatedText] = useState('');
     const [isLoader, setIsLoader ] = useState<boolean>(false);
     const [serverMessage, setServerMessage] = useState<string>('');
 
@@ -29,15 +29,27 @@ function HomePage(): JSX.Element {
         });
     }, [searchText])
 
-    const handleCallback = (data: string): void => {
-        setSearchText(data);
-        localStorage.setItem('searchText', data);
+    const handleChange = (event: any): void => {
+        setUpdatedText(event.target.value);
     }
 
+    const handleKeyDown = (event: any): void => {
+        if (event.key === 'Enter') {
+            setSearchText(updatedText);
+            localStorage.setItem('searchText', event.target.value);
+        }
+    }
 
     return (
         <>
-            <SearchComponent searchText={searchText} handleEvent={handleCallback}/>
+            <input type="text" id="simple-search"
+                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                   placeholder="Search"
+                   required
+                   value={updatedText}
+                   onChange={handleChange}
+                   onKeyDown={handleKeyDown}
+            />
             <br/>
             <h1 className="title mb-6" data-testid="pageTitle">HOME PAGE</h1>
             { serverMessage && <h6 className="title">
