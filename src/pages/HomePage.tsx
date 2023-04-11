@@ -36,7 +36,7 @@ function HomePage(): JSX.Element {
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Enter') {
             setSearchText(updatedText);
-            localStorage.setItem('searchText', event.target.value);
+            localStorage.setItem('searchText', updatedText);
         }
     }
 
