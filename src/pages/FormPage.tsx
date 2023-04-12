@@ -14,7 +14,6 @@ import {setUserList} from "../redux/usersForm";
 function FormPage(): JSX.Element {
     const dispatch = useDispatch();
     const formListArray = useSelector((state: any) => state.userForm.userList)
-    const [formList, setFormList] = useState<IFormItem[]>([]);
     const { register, reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -32,13 +31,12 @@ function FormPage(): JSX.Element {
     });
     const onSubmit: SubmitHandler<IFormItem> = (data) => {
         const file = (data.selectedFile as FileList)[0] as File;
-        const result = {
+        const newUser = {
             ...data,
             selectedFile: file,
             id: Math.random().toString(16),
-        }
-        setFormList([...formList, result])
-        dispatch(setUserList(result))
+        } as IFormItem;
+        dispatch(setUserList(newUser))
         alert('The form has been sent!');
         reset();
     };

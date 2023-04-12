@@ -6,8 +6,9 @@ const usersFormSlice = createSlice({
         userList: [],
     },
     reducers: {
-       setUserList(state, action) {
-           state.userList.push(action.payload)
+       setUserList(state, action): void {
+           const newUser = action.payload;
+           state.userList.push(newUser);
        },
     }
 })

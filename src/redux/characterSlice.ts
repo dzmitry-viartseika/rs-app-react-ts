@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from "axios";
+import { Dispatch } from 'react';
+import axios from 'axios';
+
+const API_BASE_URL = 'https://rickandmortyapi.com/api//character/';
 
 const characterSlice = createSlice({
     name: 'character',
@@ -15,7 +18,6 @@ const characterSlice = createSlice({
             state.error = null;
         } ,
         fetchCharacterListSuccess: (state, action) => {
-            console.log('action.payload', action.payload)
             state.loading = false;
             state.characterList = action.payload;
         },
@@ -35,22 +37,15 @@ const characterSlice = createSlice({
     }
 })
 
-export const {fetchCharacterListRequest, fetchCharacterListSuccess, fetchCharacterListFailure, getAllReducers, setCharacterList, setSearchText} = characterSlice.actions;
+export const { fetchCharacterListRequest, fetchCharacterListSuccess, fetchCharacterListFailure, getAllReducers, setCharacterList, setSearchText} = characterSlice.actions;
 
-const API_BASE_URL = 'https://rickandmortyapi.com/api//character/';
-
-const api = axios.create({
-    baseURL: API_BASE_URL
-});
-export const fetchUsers = (searchText?: string) => async (dispatch: any) => {
+export const fetchCharacters = (searchText?: string) => async (dispatch: Dispatch<unknown>) => {
     dispatch(fetchCharacterListRequest());
     try {
-        console.log('fetchUsers')
         const { data } = await axios.get(`${API_BASE_URL}?name=${searchText}`)
-        console.log('response response response', data.results)
         dispatch(fetchCharacterListSuccess(data.results));
-    } catch (err: any) {
-        dispatch(fetchCharacterListFailure(err.message));
+    } catch (err: unknown) {
+        dispatch(fetchCharacterListFailure((err as Error).message));
         dispatch(fetchCharacterListSuccess([]));
     }
 };
