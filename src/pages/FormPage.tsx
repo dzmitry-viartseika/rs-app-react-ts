@@ -319,8 +319,8 @@ function FormPage(): JSX.Element {
                 </div>
             </form>
             <div className="my-10 flex flex-wrap" data-testid="formList">
-                {formList && formList.length ? formList.map((item: IFormItem) => {
-                    return <FormItem item={item} key={item.id}/>
+                {formList && formList.length ? formList.map((item: IFormItem, index) => {
+                    return <FormItem item={item} key={index}/>
                 }) : null}
             </div>
         </div>
