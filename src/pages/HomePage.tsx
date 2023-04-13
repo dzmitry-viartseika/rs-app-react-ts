@@ -1,32 +1,29 @@
 import React, {KeyboardEvent, useEffect, useState} from 'react';
 import CardList from '../components/Card/CardList';
-import ICardItem from "../models/ICardItem";
-import axios from 'axios'
 import LoaderTemplate from "../components/Elements/Loader/LoaderTemplate";
+import {useDispatch, useSelector} from "react-redux";
+import {setSearchText, fetchCharacters } from '../redux/characterSlice';
+import ICardItem from "../models/ICardItem";
+
+export interface IState {
+    characters: {
+        characterList: ICardItem[],
+        searchText: string,
+        loading: boolean,
+        error: string,
+    };
+}
 
 function HomePage(): JSX.Element {
-    const [cardItems, setCardItems] = useState<ICardItem[]>([]);
-    const [searchText, setSearchText] = useState<string>('');
+    const dispatch = useDispatch();
+    const cardItems = useSelector((state: IState) => state.characters.characterList)
+    const searchText = useSelector((state: IState) => state.characters.searchText)
     const [updatedText, setUpdatedText] = useState('');
-    const [isLoader, setIsLoader ] = useState<boolean>(false);
-    const [serverMessage, setServerMessage] = useState<string>('');
+    const isLoader = useSelector((state: IState) => state.characters.loading);
+    const error = useSelector((state: IState) => state.characters.error);
 
     useEffect( () => {
-        setServerMessage('')
-        const searchText = localStorage.getItem('searchText');
-        if (searchText) {
-            setUpdatedText(searchText);
-        }
-        setIsLoader(true)
-        axios.get(searchText ? `https://rickandmortyapi.com/api/character?name=${searchText}` : 'https://rickandmortyapi.com/api//character/')
-            .then(response => {
-                setIsLoader(false)
-                setCardItems(response.data.results)
-            }).catch((err) => {
-            setServerMessage(err.response.data.error)
-            setIsLoader(false);
-            setCardItems([])
-        });
+        dispatch(fetchCharacters(searchText));
     }, [searchText])
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -35,8 +32,7 @@ function HomePage(): JSX.Element {
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Enter') {
-            setSearchText(updatedText);
-            localStorage.setItem('searchText', updatedText);
+            dispatch(setSearchText(updatedText))
         }
     }
 
@@ -52,8 +48,8 @@ function HomePage(): JSX.Element {
             />
             <br/>
             <h1 className="title mb-6" data-testid="pageTitle">HOME PAGE</h1>
-            { serverMessage && <h6 className="title">
-                { serverMessage }
+            { error && <h6 className="title">
+                { error }
             </h6> }
             <CardList items={cardItems} />
             { isLoader && <LoaderTemplate /> }

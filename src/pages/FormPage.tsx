@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React from 'react';
 import FormItem from "../components/Form/FormItem";
 import IFormItem from '../models/IFormItem';
 import InputComponent from "../components/Elements/InputComponent/InputComponent";
@@ -11,9 +11,15 @@ import genderList from "../constants/genderList";
 import {useDispatch, useSelector} from "react-redux";
 import {setUserList} from "../redux/usersForm";
 
+export interface IState {
+    userForm: {
+        userList: IFormItem[],
+    };
+}
+
 function FormPage(): JSX.Element {
     const dispatch = useDispatch();
-    const formListArray = useSelector((state: any) => state.userForm.userList)
+    const formListArray = useSelector((state: IState) => state.userForm.userList)
     const { register, reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
