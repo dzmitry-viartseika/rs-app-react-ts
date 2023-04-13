@@ -5,15 +5,16 @@ export interface IState {
     userList: IFormItem[];
 }
 
+export const initialState = {
+    userList: [],
+} as IState
+
 const usersFormSlice = createSlice({
     name: 'usersForm',
-    initialState: {
-        userList: [],
-    } as IState,
+    initialState,
     reducers: {
        setUserList(state, action): void {
-           const newUser = action.payload;
-           state.userList.push(newUser);
+           state.userList.push(action.payload);
        },
     }
 })

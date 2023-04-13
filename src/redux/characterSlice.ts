@@ -1,17 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
 import axios from 'axios';
+import ICardItem from "../models/ICardItem";
 
 const API_BASE_URL = 'https://rickandmortyapi.com/api//character/';
 
+export interface IState {
+    characterList: ICardItem[];
+    searchText: string;
+    loading: boolean;
+    error: string | null;
+}
+
+export const initialState = {
+    characterList: [],
+    searchText: '',
+    loading: false,
+    error: null,
+} as IState
+
 const characterSlice = createSlice({
     name: 'character',
-    initialState: {
-        characterList: [],
-        searchText: '',
-        loading: false,
-        error: null,
-    },
+    initialState,
     reducers: {
         fetchCharacterListRequest(state) {
             state.loading = true;
@@ -25,19 +35,13 @@ const characterSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-       getAllReducers(state, action) {
-           state.characterList = action.payload.characterList;
-       },
-       setCharacterList(state, action) {
-           state.characterList = action.payload;
-       },
-       setSearchText(state, action) {
+        setSearchText(state, action) {
            state.searchText = action.payload
-       },
+        },
     }
 })
 
-export const { fetchCharacterListRequest, fetchCharacterListSuccess, fetchCharacterListFailure, getAllReducers, setCharacterList, setSearchText} = characterSlice.actions;
+export const { fetchCharacterListRequest, fetchCharacterListSuccess, fetchCharacterListFailure, setSearchText} = characterSlice.actions;
 
 export const fetchCharacters = (searchText?: string) => async (dispatch: Dispatch<unknown>) => {
     dispatch(fetchCharacterListRequest());

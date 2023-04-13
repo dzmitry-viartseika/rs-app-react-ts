@@ -23,6 +23,9 @@ function HomePage(): JSX.Element {
     const error = useSelector((state: IState) => state.characters.error);
 
     useEffect( () => {
+        if (searchText) {
+            setUpdatedText(searchText)
+        }
         dispatch(fetchCharacters(searchText));
     }, [searchText])
 
