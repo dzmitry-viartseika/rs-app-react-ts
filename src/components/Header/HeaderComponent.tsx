@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo.png';
 import IMenuItem from '../../models/IMenuItem';
 import '../Header/headerComponent.css';
-import menuList from '../../constants/menuList'
 
-function HeaderComponent(): JSX.Element {
-    const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
 
-    useEffect(() => {
-        setMenuItems(menuList);
-    }, [])
+type HeaderComponentProps = {
+    menuItems: IMenuItem[],
+}
 
+const HeaderComponent = ({menuItems}: HeaderComponentProps) => {
     return (
         <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
             <div className="flex flex-wrap items-center justify-between">
@@ -22,7 +20,7 @@ function HeaderComponent(): JSX.Element {
                         className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Test Logo</span>
                 </Link>
                 <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                    { menuItems && menuItems.length ? <ul className="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    { menuItems && menuItems.length && <ul className="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         {menuItems.map((item: IMenuItem) => {
                             return (
                                 <li key={item.id}>
@@ -32,7 +30,7 @@ function HeaderComponent(): JSX.Element {
                                 </li>
                             )
                         })}
-                    </ul> : null }
+                    </ul>}
                 </div>
             </div>
         </nav>

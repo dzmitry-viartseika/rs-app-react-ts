@@ -10,5 +10,6 @@ export default interface IFormItem {
     isAgreedWithPersonalData: boolean,
     selectedOptionGender: string,
     isReceivePromo: boolean,
+    id?: string,
     selectedFile?: FileList | File | Blob | MediaSource | undefined | null;
 }

@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React from 'react';
 import FormItem from "../components/Form/FormItem";
 import IFormItem from '../models/IFormItem';
 import InputComponent from "../components/Elements/InputComponent/InputComponent";
@@ -8,9 +8,18 @@ import statesList from "../constants/statesList";
 import countryList from "../constants/countryList";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import genderList from "../constants/genderList";
+import {useDispatch, useSelector} from "react-redux";
+import {setUserList} from "../redux/usersForm";
+
+export interface IState {
+    userForm: {
+        userList: IFormItem[],
+    };
+}
 
 function FormPage(): JSX.Element {
-    const [formList, setFormList] = useState<IFormItem[]>([]);
+    const dispatch = useDispatch();
+    const formListArray = useSelector((state: IState) => state.userForm.userList)
     const { register, reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -28,12 +37,12 @@ function FormPage(): JSX.Element {
     });
     const onSubmit: SubmitHandler<IFormItem> = (data) => {
         const file = (data.selectedFile as FileList)[0] as File;
-        const result = {
+        const newUser = {
             ...data,
             selectedFile: file,
             id: Math.random().toString(16),
-        }
-        setFormList([...formList, result])
+        } as IFormItem;
+        dispatch(setUserList(newUser))
         alert('The form has been sent!');
         reset();
     };
@@ -319,9 +328,9 @@ function FormPage(): JSX.Element {
                 </div>
             </form>
             <div className="my-10 flex flex-wrap" data-testid="formList">
-                {formList && formList.length ? formList.map((item: IFormItem, index) => {
+                {formListArray && formListArray.length ? formListArray.map((item: IFormItem, index: number) => {
                     return <FormItem item={item} key={index}/>
-                }) : null}
+                }) : <div>FormList is empty</div>}
             </div>
         </div>
     )
