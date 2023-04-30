@@ -4,7 +4,7 @@
     "outDir": "./dist",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["cypress", "node"],
+    "types": ["cypress", "node", "@types/jest", "@testing-library/jest-dom"],
     "allowJs": false,
     "skipLibCheck": true,
     "baseUrl": "./src/",
