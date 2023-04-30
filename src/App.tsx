@@ -1,35 +1,31 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeaderComponent from './components/Header/HeaderComponent';
-import AboutUsPage from './pages/AboutUsPage';
-import HomePage from "./pages/HomePage";
-import NotFound from "./pages/NotFound";
-import FormPage from "./pages/FormPage";
-import './assets/css/App/App.css';
-import IMenuItem from "./models/IMenuItem";
-import menuList from './constants/menuList'
+import { Route, Routes, useLocation } from 'react-router-dom';
+import './App.css';
 
-function App() {
+import FormPage from './pages/FormPage';
+import HeaderComponent from "./components/Header/HeaderComponent";
+import menuList from "./constants/menuList";
+import IMenuItem from "./models/IMenuItem";
+import AboutUsPage from "./pages/AboutUsPage";
+import NotFound from "./pages/NotFound";
+import HomePage from "./pages/HomePage";
+
+export function App() {
+  const location = useLocation();
     const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
 
     useEffect(() => {
         setMenuItems(menuList);
     }, [])
-
-
   return (
-    <div className="app">
-        <BrowserRouter>
-            <HeaderComponent data-testid="headerComponent" menuItems={menuItems}/>
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutUsPage />} />
-            <Route path="/form" element={<FormPage />} />
-            <Route path="*" element={<NotFound />} />
+    <>
+        <HeaderComponent data-testid="headerComponent" menuItems={menuItems}/>
+        <Routes location={location} key={location.key}>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/about" element={<AboutUsPage />}></Route>
+            <Route path="/form" element={<FormPage />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
         </Routes>
-    </BrowserRouter>
-    </div>
-  )
+    </>
+  );
 }
-
-export default App

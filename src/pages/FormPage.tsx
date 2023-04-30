@@ -9,7 +9,8 @@ import countryList from "../constants/countryList";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import genderList from "../constants/genderList";
 import {useDispatch, useSelector} from "react-redux";
-import {setUserList} from "../redux/usersForm";
+import {setFormCards} from "../store/formCardsSlice";
+import {RootState} from "../store/store";
 
 export interface IState {
     userForm: {
@@ -19,7 +20,7 @@ export interface IState {
 
 function FormPage(): JSX.Element {
     const dispatch = useDispatch();
-    const formListArray = useSelector((state: IState) => state.userForm.userList)
+    const formListArray = useSelector((state: RootState) => state.formCards.userList);
     const { register, reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -42,7 +43,7 @@ function FormPage(): JSX.Element {
             selectedFile: file,
             id: Math.random().toString(16),
         } as IFormItem;
-        dispatch(setUserList(newUser))
+        dispatch(setFormCards(newUser))
         alert('The form has been sent!');
         reset();
     };

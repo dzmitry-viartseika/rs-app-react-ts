@@ -1,33 +1,33 @@
 import React, {KeyboardEvent, useEffect, useState} from 'react';
 import CardList from '../components/Card/CardList';
-import LoaderTemplate from "../components/Elements/Loader/LoaderTemplate";
 import {useDispatch, useSelector} from "react-redux";
-import {setSearchText, fetchCharacters } from '../redux/characterSlice';
+import {fetchCharacters } from '../store/searchResultsSlice';
+import {setQuery } from '../store/searchSlice';
 import ICardItem from "../models/ICardItem";
+import {RootState} from "../store/store";
+import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 export interface IState {
-    characters: {
-        characterList: ICardItem[],
-        searchText: string,
+    searchResults: {
+        cards: ICardItem[],
         loading: boolean,
         error: string,
     };
 }
 
 function HomePage(): JSX.Element {
-    const dispatch = useDispatch();
-    const cardItems = useSelector((state: IState) => state.characters.characterList)
-    const searchText = useSelector((state: IState) => state.characters.searchText)
+    const query = useSelector((state: RootState) => state.search.searchQuery);
+    const cardsData = useSelector((state: RootState) => state.searchResults.cards);
+    const page = useSelector((state: RootState) => state.searchResults.page);
+    const isLoading = useSelector((state: RootState) => state.searchResults.isLoading);
+    const error = useSelector((state: RootState) => state.searchResults.error);
+    const dispatch: ThunkDispatch<RootState, undefined, AnyAction> = useDispatch();
     const [updatedText, setUpdatedText] = useState('');
-    const isLoader = useSelector((state: IState) => state.characters.loading);
-    const error = useSelector((state: IState) => state.characters.error);
 
-    useEffect( () => {
-        if (searchText) {
-            setUpdatedText(searchText)
-        }
-        dispatch(fetchCharacters(searchText));
-    }, [searchText])
+    useEffect(() => {
+        dispatch(fetchCharacters({ page, query }));
+    }, [query, page, dispatch]);
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setUpdatedText(event.target.value);
@@ -35,7 +35,7 @@ function HomePage(): JSX.Element {
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>): void => {
         if (event.key === 'Enter') {
-            dispatch(setSearchText(updatedText))
+            dispatch(setQuery(updatedText))
         }
     }
 
@@ -51,11 +51,9 @@ function HomePage(): JSX.Element {
             />
             <br/>
             <h1 className="title mb-6" data-testid="pageTitle">HOME PAGE</h1>
-            { error && <h6 className="title">
-                { error }
-            </h6> }
-            <CardList items={cardItems} />
-            { isLoader && <LoaderTemplate /> }
+            {!error && !isLoading && cardsData.length && (
+                <CardList items={cardsData} />
+            )}
         </>
     )
 }

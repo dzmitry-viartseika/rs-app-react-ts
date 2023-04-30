@@ -1,23 +1,24 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
-
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path'
+import istanbul from 'vite-plugin-istanbul';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/tests/setup.ts',
-    coverage: {
-      reporter: ['text', 'json', 'html'],
+  plugins: [
+    react(),
+    istanbul({
+      exclude: ['node_modules', 'test/', 'coverage/'],
+      extension: ['tsx'],
+      cypress: true,
+    }),
+  ],
+  server: {
+    open: true,
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
     },
   },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    }
-  },
-})
+  base: './',
+});
