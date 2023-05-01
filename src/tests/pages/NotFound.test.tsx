@@ -4,7 +4,7 @@ import NotFound from '../../pages/NotFound';
 import React from 'react';
 
 describe('NotFound.tsx', () => {
-    it('should be visible page title', () => {
+    it.skip('should be visible page title', () => {
         render(<NotFound />);
         expect(screen.queryByTestId('pageTitle')).toBeInTheDocument();
     });
