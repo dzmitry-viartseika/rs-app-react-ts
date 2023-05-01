@@ -5,7 +5,7 @@ export interface IFormCardsState {
   userList: IFormItem[];
 }
 
-const initialState: IFormCardsState = {
+export const initialState: IFormCardsState = {
   userList: [],
 };
 

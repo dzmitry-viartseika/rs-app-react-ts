@@ -50,7 +50,7 @@ function FormPage(): JSX.Element {
 
     return (
         <div data-cy="formText">
-            <h1 className="title mb-6" data-cy="pageTitle">FORM PAGE</h1>
+            <h1 className="title mb-6" data-cy="pageTitle" data-testid="pageTitle">FORM PAGE</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="app-form">
                 <div className="flex justify-center align-items flex-col">
                     <Controller control={control} name="firstName" rules={{
