@@ -1,17 +1,19 @@
 import React, {ChangeEventHandler} from 'react';
 
 type CheckBoxProps = {
+    id: string,
     checked: boolean,
     disabled?: boolean,
     label: string,
     onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-function CheckboxComponent ({ checked, disabled, label, onChange }: CheckBoxProps) {
+function CheckboxComponent ({ id, checked, disabled, label, onChange }: CheckBoxProps) {
 
     return (
         <div>
             <label>
                 <input
+                    id={id}
                     type="checkbox"
                     checked={checked}
                     onChange={onChange}

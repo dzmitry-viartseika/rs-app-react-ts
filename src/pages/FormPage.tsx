@@ -185,6 +185,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <CheckboxComponent
+                                    id="isAgreedWithPersonalData"
                                     label={'I consist to my personal data'}
                                     checked={value}
                                     onChange={(newValue) => onChange(newValue)}
@@ -209,6 +210,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <CheckboxComponent
+                                    id="isReceivePromo"
                                     label={'Receive Promo'}
                                     checked={value}
                                     onChange={(newValue) => onChange(newValue)}
@@ -233,6 +235,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionGender"
                                     error={errors.selectedOptionGender}
                                     register={register('selectedOptionGender')}
                                     label="Select Gender"
@@ -261,6 +264,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionCountry"
                                     register={register('selectedOptionCountry')}
                                     label="Select Country"
                                     value={value}
@@ -287,6 +291,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error}}) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionState"
                                     register={register('selectedOptionState')}
                                     label="Select State"
                                     value={value}
