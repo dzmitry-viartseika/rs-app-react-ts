@@ -8,7 +8,7 @@
     "start:dev": "nodemon",
     "build": "npx tsc",
     "prepare": "husky install",
-    "lint": "eslint --fix --ext .ts,.tsx ./src",
+    "lint": "eslint --fix --ext .ts,.tsx src",
     "test": "eslint src --fix && vitest run --changed HEAD~1",
     "coverage": "vitest run --coverage",
     "vitest": "vitest",
