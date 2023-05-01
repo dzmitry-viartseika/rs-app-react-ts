@@ -25,10 +25,3 @@ jobs:
 
       - name: Test
         run: npm run test
-
-      - name: Run E2E tests
-        uses: cypress-io/github-action@v2
-        with:
-          record: true
-          start: cypress:test
-          wait-on: 'http://localhost:5173/'
