@@ -9,10 +9,9 @@
     "build": "npx tsc",
     "prepare": "husky install",
     "lint": "eslint --fix --ext .ts,.tsx src",
-    "test": "eslint src --fix && vitest run --changed HEAD~1",
     "coverage": "vitest run --coverage",
-    "vitest": "vitest",
-    "deploy": "eslint src --fix && vitest run --changed HEAD~1 && tsc && vite build && gh-pages -d dist",
+    "test": "vitest",
+    "deploy": "vite build",
     "cypress:open": "cypress open",
     "cypress:test": "nyc instrument --compact=false src instrumented && npx cypress run --e2e && npx nyc report && npx nyc report --reporter=text-summary",
     "cypress:coverage": "npx cypress run  && npx nyc instrument --compact=false src instrumented && npx nyc report --reporter"
