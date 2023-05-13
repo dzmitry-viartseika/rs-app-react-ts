@@ -9,7 +9,8 @@ import countryList from "../constants/countryList";
 import {useForm, Controller, SubmitHandler} from "react-hook-form";
 import genderList from "../constants/genderList";
 import {useDispatch, useSelector} from "react-redux";
-import {setUserList} from "../redux/usersForm";
+import {setFormCards} from "../store/formCardsSlice";
+import {RootState} from "../store/store";
 
 export interface IState {
     userForm: {
@@ -19,7 +20,7 @@ export interface IState {
 
 function FormPage(): JSX.Element {
     const dispatch = useDispatch();
-    const formListArray = useSelector((state: IState) => state.userForm.userList)
+    const formListArray = useSelector((state: RootState) => state.formCards.userList);
     const { register, reset, control, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
             firstName: '',
@@ -42,14 +43,14 @@ function FormPage(): JSX.Element {
             selectedFile: file,
             id: Math.random().toString(16),
         } as IFormItem;
-        dispatch(setUserList(newUser))
+        dispatch(setFormCards(newUser))
         alert('The form has been sent!');
         reset();
     };
 
     return (
-        <div data-testid="formText">
-            <h1 className="title mb-6" data-testid="pageTitle">FORM PAGE</h1>
+        <div data-cy="formText">
+            <h1 className="title mb-6" data-cy="pageTitle" data-testid="pageTitle">FORM PAGE</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="app-form">
                 <div className="flex justify-center align-items flex-col">
                     <Controller control={control} name="firstName" rules={{
@@ -58,14 +59,14 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <InputComponent
-                                    label={'First Name'}
+                                    label={'firstName'}
                                     type={'text'}
                                     value={value}
                                     onChange={(newValue) => onChange(newValue)}
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -90,7 +91,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -116,7 +117,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -141,7 +142,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -166,7 +167,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -184,13 +185,14 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <CheckboxComponent
+                                    id="isAgreedWithPersonalData"
                                     label={'I consist to my personal data'}
                                     checked={value}
                                     onChange={(newValue) => onChange(newValue)}
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -208,13 +210,14 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <CheckboxComponent
+                                    id="isReceivePromo"
                                     label={'Receive Promo'}
                                     checked={value}
                                     onChange={(newValue) => onChange(newValue)}
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -232,6 +235,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionGender"
                                     error={errors.selectedOptionGender}
                                     register={register('selectedOptionGender')}
                                     label="Select Gender"
@@ -241,7 +245,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -260,6 +264,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error} }) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionCountry"
                                     register={register('selectedOptionCountry')}
                                     label="Select Country"
                                     value={value}
@@ -268,7 +273,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -286,6 +291,7 @@ function FormPage(): JSX.Element {
                         ({ field: {onChange, value}, fieldState: {error}}) => (
                             <>
                                 <SelectComponent
+                                    id="selectedOptionState"
                                     register={register('selectedOptionState')}
                                     label="Select State"
                                     value={value}
@@ -294,7 +300,7 @@ function FormPage(): JSX.Element {
                                 />
                                 {
                                     error && (
-                                        <div data-testid="formError">
+                                        <div data-cy="formError">
                                             <p className="text-red-500 text-xs mt-2 app-form__validation">
                                                 { error.message }
                                             </p>
@@ -314,7 +320,7 @@ function FormPage(): JSX.Element {
                     aria-describedby="file_input_help" id="file_input"  accept="image/*" type="file"/>
                 <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG,
                     PNG, JPG or GIF (MAX. 800x400px).</p>
-                {errors.selectedFile && <div data-testid="formError">
+                {errors.selectedFile && <div data-cy="formError">
                     <p className="text-red-500 text-xs mt-2 app-form__validation">
                         The file is required
                     </p>
@@ -322,12 +328,13 @@ function FormPage(): JSX.Element {
             </div>
                     <button
                     type="submit"
+                    data-cy="button--submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         Submit Data
                     </button>
                 </div>
             </form>
-            <div className="my-10 flex flex-wrap" data-testid="formList">
+            <div className="my-10 flex flex-wrap" data-cy="formList">
                 {formListArray && formListArray.length ? formListArray.map((item: IFormItem, index: number) => {
                     return <FormItem item={item} key={index}/>
                 }) : <div>FormList is empty</div>}
